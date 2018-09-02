@@ -1,0 +1,22 @@
+languageCode = "en-us"
+title = "Hugo Tailwind Starter"
+
+navigateToChanged = true
+metaDataFormat = "yaml"
+enableEmoji = true
+
+[context.production.environment]
+  HUGO_VERSION = "0.46"
+
+[blackfriday]
+  hrefTargetBlank = true
+
+[outputFormats]
+  [outputFormats.version]
+    mediaType = "application/json"
+    baseName = "version"
+    isPlainText = true
+    notAlternative = true
+
+[outputs]
+  home = ["HTML", "JSON", "version"]

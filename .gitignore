@@ -1,0 +1,10 @@
+node_modules/
+/npm-debug.log
+.vscode-upload.json
+Thumbs.db
+.vscode/launch.json
+.vscode/settings.json
+package-lock.json
+.idea/
+.DS_Store
+public/

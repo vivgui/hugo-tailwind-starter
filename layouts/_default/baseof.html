@@ -1,0 +1,32 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ .Title }}{{ if not .IsHome}} | {{ .Site.Title }}{{end}}</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500|Open+Sans:400,500,700|Oswald:500" rel="stylesheet">
+    {{- $cssOpts := (dict "targetPath" "css/main.css" "enableSourceMap" true ) -}}
+    {{- $postcssOpts := (dict "config" "assets/config/postcss.config.js" ) -}}
+    {{- if .Site.IsServer -}}
+    {{- $styles := resources.Get "scss/main.scss" | toCSS $cssOpts | postCSS $postcssOpts }}
+    <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
+    {{- else -}}
+    {{- $styles := resources.Get "scss/main.scss" | toCSS $cssOpts | postCSS $postcssOpts | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" media="screen">
+    {{- end }}
+</head>
+<body>
+<div id="main">
+    {{ block "header" . }}
+    {{ end -}}
+
+    {{ block "main" . }}
+    {{ end -}}
+
+    {{ block "footer" . }}
+    {{ end -}}
+</div>
+
+</body>
+</html>

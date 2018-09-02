@@ -1,0 +1,30 @@
+{
+  "name": "tecidev",
+  "version": "1.0.0",
+  "description": "Thunderhead Engineering Website",
+  "main": "index.js",
+  "scripts": {
+    "update_hugo": "python .\\bin\\update_bin.py",
+    "clean_public_win": "if exist \"public\\\" rmdir public /S /Q",
+    "clean_resources_win": "if exist \"resources\\\" rmdir resources /S /Q",
+    "clean_win": "npm run clean_public_win && npm run clean_resources_win",
+    "build_win": "npm run clean_public_win && npm run clean_resources_win && .\\bin\\hugo_extended-windows.exe --gc",
+    "serve_win": "npm run clean_resources_win && .\\bin\\hugo_extended-windows.exe server --disableFastRender",
+    "clean_osx": "rm -rf public && rm -rf resources",
+    "build_osx": "chmod a+x ./bin/hugo_extended.macos && rm -rf public && rm -rf resources && ./bin/hugo_extended.macos --gc",
+    "serve_osx": "chmod a+x ./bin/hugo_extended.macos && rm -rf resources && ./bin/hugo_extended.macos server --disableFastRender",
+    "clean_lin": "rm -rf public && rm -rf resources",
+    "build_lin": "chmod a+x ./bin/hugo_extended.linux && rm -rf public && rm -rf resources && ./bin/hugo_extended.linux --gc",
+    "serve_lin": "chmod a+x ./bin/hugo_extended.linux && rm -rf resources && ./bin/hugo_extended.linux server --disableFastRender"
+  },
+  "author": "Thunderhead Engineering",
+  "license": "All Rights Reserved",
+  "dependencies": {
+    "@fullhuman/postcss-purgecss": "^1.0.1",
+    "autoprefixer": "^9.0.1",
+    "postcss": "^7.0.1",
+    "postcss-cli": "^6.0.0",
+    "postcss-import": "^11.1.0",
+    "tailwindcss": "^0.6.4"
+  }
+}
