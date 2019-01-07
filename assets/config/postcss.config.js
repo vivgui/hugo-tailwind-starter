@@ -8,16 +8,16 @@ module.exports = {
   plugins: [
     require('tailwindcss')('assets/config/tailwind.js'),
 
-    require('@fullhuman/postcss-purgecss')({
-      content: ['layouts/**/*.html'],
-      css: ['public/css/*.css'],
-      whitelistPatterns: [],
-      extractors: [
-      {
-        extractor: TailwindExtractor,
-        extensions: ['html']
-      }]
-    }),
+    // require('@fullhuman/postcss-purgecss')({
+    //   content: ['layouts/**/*.html'],
+    //   css: ['public/css/*.css'],
+    //   whitelistPatterns: [],
+    //   extractors: [
+    //   {
+    //     extractor: TailwindExtractor,
+    //     extensions: ['html']
+    //   }]
+    // }),
        
     require('autoprefixer')({
       grid: true,

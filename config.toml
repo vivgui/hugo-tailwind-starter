@@ -6,7 +6,7 @@ metaDataFormat = "yaml"
 enableEmoji = true
 
 [context.production.environment]
-  HUGO_VERSION = "0.46"
+  HUGO_VERSION = "0.53"
 
 [blackfriday]
   hrefTargetBlank = true
