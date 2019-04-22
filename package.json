@@ -2,7 +2,8 @@
   "name": "hugo-tailwind-starter",
   "version": "1.0.0",
   "scripts": {
-    "serve": "hugo server --disableFastRender"
+    "serve": "hugo server --disableFastRender",
+    "build": "env HUGO_ENV='production' NODE_ENV='production' hugo"
   },
   "author": "Red Pixel",
   "license": "All Rights Reserved",
@@ -12,6 +13,6 @@
     "postcss": "^7.0.1",
     "postcss-cli": "^6.0.0",
     "postcss-import": "^11.1.0",
-    "tailwindcss": "^0.7.3"
+    "tailwindcss": "^1.0.0-beta.5"
   }
 }

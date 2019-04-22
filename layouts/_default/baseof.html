@@ -1,11 +1,13 @@
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ .Title }}{{ if not .IsHome}} | {{ .Site.Title }}{{end}}</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500|Open+Sans:400,500,700|Oswald:500" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,700" rel="stylesheet">
     {{- $cssOpts := (dict "targetPath" "css/main.css" "enableSourceMap" true ) -}}
     {{- $postcssOpts := (dict "config" "assets/config/postcss.config.js" ) -}}
     {{- if .Site.IsServer -}}
@@ -16,19 +18,21 @@
     <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" media="screen">
     {{- end }}
 </head>
+
 <body>
-<div id="main">
-    {{ block "header" . }}
+    <div id="main">
+        {{ block "header" . }}
         {{ partial "header" . }}
-    {{ end -}}
+        {{ end -}}
 
-    {{ block "main" . }}
-    {{ end -}}
+        {{ block "main" . }}
+        {{ end -}}
 
-    {{ block "footer" . }}
+        {{ block "footer" . }}
         {{ partial "footer" . }}
-    {{ end -}}
-</div>
+        {{ end -}}
+    </div>
 
 </body>
+
 </html>
