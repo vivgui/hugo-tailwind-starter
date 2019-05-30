@@ -11,5 +11,5 @@
 ////////////////////////////////
 
 html {
-    font-family: theme('fontFamily.body');
+    @apply font-body;
 }

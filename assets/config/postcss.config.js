@@ -8,7 +8,7 @@ module.exports = {
   plugins: [
     require("tailwindcss")("assets/config/tailwind.config.js"),
 
-    process.env.NODE_ENV === "production"
+    process.env.HUGO_ENV === "production"
       ? require("@fullhuman/postcss-purgecss")({
           content: ["layouts/**/*.html"],
           css: ["public/css/*.css"],
@@ -22,9 +22,6 @@ module.exports = {
         })
       : null,
 
-    require("autoprefixer")({
-      grid: true,
-      browsers: [">1%"]
-    })
+    require("autoprefixer")()
   ]
 };

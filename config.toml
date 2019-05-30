@@ -1,5 +1,6 @@
 languageCode = "en-us"
 title = "Hugo Tailwind Starter"
+disableKinds = ["taxonomy", "taxonomyTerm", "RSS", "sitemap"]
 
 navigateToChanged = true
 metaDataFormat = "yaml"
@@ -10,13 +11,3 @@ enableEmoji = true
 
 [blackfriday]
   hrefTargetBlank = true
-
-[outputFormats]
-  [outputFormats.version]
-    mediaType = "application/json"
-    baseName = "version"
-    isPlainText = true
-    notAlternative = true
-
-[outputs]
-  home = ["HTML", "JSON", "version"]
