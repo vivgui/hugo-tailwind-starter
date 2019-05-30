@@ -2,7 +2,7 @@
   "name": "hugo-tailwind-starter",
   "version": "1.0.0",
   "scripts": {
-    "develop": "hugo server --disableFastRender",
+    "develop": "hugo server --disableFastRender --gc",
     "build": "env HUGO_ENV='production' hugo"
   },
   "author": "Red Pixel",
