@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ .Title }}{{ if not .IsHome}} | {{ .Site.Title }}{{end}}</title>
     <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    {{ block "extra_css" . }}{{ end }}
+
+    <script src="https://kit.fontawesome.com/145f1cd7f7.js"></script>
 
     {{- $cssOpts := (dict "targetPath" "css/main.css" "enableSourceMap" true ) -}}
     {{- $postcssOpts := (dict "config" "assets/config/postcss.config.js" ) -}}
@@ -16,7 +17,7 @@
     {{- $styles := resources.Get "scss/main.scss" | toCSS $cssOpts | postCSS $postcssOpts }}
     <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
     {{- else -}}
-    {{- $styles := resources.Get "scss/main.scss" | toCSS $cssOpts | postCSS $postcssOpts | minify | fingerprint }}
+    {{- $styles := resources.Get "scss/main.scss" | toCSS $cssOpts | postCSS $postcssOpts | fingerprint }}
     <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" media="screen">
     {{- end }}
 </head>
@@ -35,6 +36,8 @@
         {{ end -}}
     </div>
 
+    {{ block "extra_js" .}}
+    {{ end }}
 </body>
 
 </html>

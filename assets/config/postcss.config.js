@@ -12,16 +12,13 @@ module.exports = {
       ? require("@fullhuman/postcss-purgecss")({
           content: ["layouts/**/*.html"],
           css: ["public/css/*.css"],
-          whitelistPatterns: [],
-          extractors: [
-            {
-              extractor: TailwindExtractor,
-              extensions: ["html"]
-            }
-          ]
+          extractors: [{ extractor: TailwindExtractor, extensions: ["html"] }]
         })
       : null,
 
-    require("autoprefixer")()
+    require("autoprefixer")(),
+    require("cssnano")({
+      preset: ["default", { discardComments: { removeAll: true } }]
+    })
   ]
 };
