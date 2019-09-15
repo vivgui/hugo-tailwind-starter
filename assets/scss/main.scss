@@ -1,15 +1,18 @@
-////////////////////////////////
-//Tailwind Imports//
-////////////////////////////////
 
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
-
-////////////////////////////////
-//Custom CSS//
-////////////////////////////////
 
 html {
-    @apply font-body;
+    @apply font-body antialiased;
 }
+
+.btn {
+    @apply transition-all inline-block text-center;
+
+    &:focus {
+        @apply outline-none shadow-outline;
+    }
+}
+
+@tailwind utilities;
+

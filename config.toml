@@ -1,10 +1,8 @@
 languageCode = "en-us"
 title = "Hugo Tailwind Starter"
 disableKinds = ["taxonomy", "taxonomyTerm", "RSS", "sitemap"]
-
-navigateToChanged = true
 metaDataFormat = "yaml"
-enableEmoji = true
+enableRobotsTXT =  true
 
 [context.production.environment]
   HUGO_VERSION = "0.55"

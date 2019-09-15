@@ -1,43 +1,56 @@
-<html>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {{/*  // Meta information  */}}
+        <title>{{ .Title }}{{ if not .IsHome}} | {{ .Site.Title }}{{end}}</title>
+        <meta name="description" content="{{ .Params.meta_description }}">
+        <link rel="canonical" href="{{ .Permalink }}" />
+        <meta property="og:site_name" content="{{ .Site.Title }}">
+        <meta property="og:title" content="{{ .Title }}">
+        <meta property="og:url" content="{{ .Permalink }}">
+        <meta property="og:description" content="{{ .Params.meta_description }}">
+        <meta property="og:image" content="{{ .Params.featured_image }}">
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:description" content="{{ .Params.meta_description }}" />
+        <meta name="twitter:title" content="{{ .Title }}" />
+        <meta name="twitter:site" content="@{{ .Site.Data.global.social.twitter }}" />
+        <meta name="twitter:image" content="{{ .Params.featured_image }}" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+        {{/*  // Assets information  */}}
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.3/css/boxicons.min.css' rel='stylesheet'>
+        {{ block "extra_css" . }}{{ end }}
+        {{- $cssOpts := (dict "targetPath" "css/main.css" "enableSourceMap" true ) -}}
+        {{- $postcssOpts := (dict "config" "assets/config/postcss.config.js" ) -}}
+        {{- if .Site.IsServer -}}
+        {{- $styles := resources.Get "scss/main.scss" | toCSS $cssOpts | postCSS $postcssOpts }}
+        <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
+        {{- else -}}
+        {{- $styles := resources.Get "scss/main.scss" | toCSS $cssOpts | postCSS $postcssOpts | fingerprint }}
+        <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" media="screen">
+        {{- end }}
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="main">
+            {{ block "header" . }}
+            {{ partial "header" . }}
+            {{ end -}}
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ .Title }}{{ if not .IsHome}} | {{ .Site.Title }}{{end}}</title>
-    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+            {{ block "main" . }}
+            {{ end -}}
 
-    {{ block "extra_css" . }}{{ end }}
+            {{ block "footer" . }}
+            {{ partial "footer" . }}
+            {{ end -}}
+        </div>
 
-    <script src="https://kit.fontawesome.com/145f1cd7f7.js"></script>
+        {{ block "extra_js" .}}
+        {{ end }}
 
-    {{- $cssOpts := (dict "targetPath" "css/main.css" "enableSourceMap" true ) -}}
-    {{- $postcssOpts := (dict "config" "assets/config/postcss.config.js" ) -}}
-    {{- if .Site.IsServer -}}
-    {{- $styles := resources.Get "scss/main.scss" | toCSS $cssOpts | postCSS $postcssOpts }}
-    <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
-    {{- else -}}
-    {{- $styles := resources.Get "scss/main.scss" | toCSS $cssOpts | postCSS $postcssOpts | fingerprint }}
-    <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" media="screen">
-    {{- end }}
-</head>
-
-<body>
-    <div id="main">
-        {{ block "header" . }}
-        {{ partial "header" . }}
-        {{ end -}}
-
-        {{ block "main" . }}
-        {{ end -}}
-
-        {{ block "footer" . }}
-        {{ partial "footer" . }}
-        {{ end -}}
-    </div>
-
-    {{ block "extra_js" .}}
-    {{ end }}
-</body>
-
+        {{- $js := resources.Get "js/main.js" }}
+        <script src="{{ $js.Permalink }}"></script>
+    </body>
 </html>

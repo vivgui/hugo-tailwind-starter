@@ -1,8 +1,3 @@
-class TailwindExtractor {
-  static extract(content) {
-    return content.match(/[A-z0-9-:\/]+/g);
-  }
-}
 
 module.exports = {
   plugins: [
@@ -12,13 +7,10 @@ module.exports = {
       ? require("@fullhuman/postcss-purgecss")({
           content: ["layouts/**/*.html"],
           css: ["public/css/*.css"],
-          extractors: [{ extractor: TailwindExtractor, extensions: ["html"] }]
+          extractors: [{ extractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || [], extensions: ["html"] }]
         })
       : null,
 
     require("autoprefixer")(),
-    require("cssnano")({
-      preset: ["default", { discardComments: { removeAll: true } }]
-    })
   ]
 };

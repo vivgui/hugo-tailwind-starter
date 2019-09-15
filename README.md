@@ -1,5 +1,11 @@
 # Hugo Tailwind Starter
 
+To install dependencies:
+
+``` bash
+yarn
+```
+
 To run:
 
 ``` bash
