@@ -4,7 +4,12 @@ new Vue({
     data: {
         mobileMenu: false
     },
-    methods: {},
+    methods: {
+        triggerMenu: function() {
+            document.body.classList.toggle("overflow-hidden");
+            this.mobileMenu = !this.mobileMenu;
+        }
+    },
     mounted: function() {
 
     }
