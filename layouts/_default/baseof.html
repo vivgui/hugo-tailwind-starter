@@ -1,3 +1,4 @@
+{{ $data := .Site.Data.global }}
 <!doctype html>
 <html lang="en">
     <head>
@@ -16,22 +17,18 @@
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:description" content="{{ .Params.meta_description }}" />
         <meta name="twitter:title" content="{{ .Title }}" />
-        <meta name="twitter:site" content="@{{ .Site.Data.global.social.twitter }}" />
+        <meta name="twitter:site" content="@{{ $data.social.twitter }}" />
         <meta name="twitter:image" content="{{ .Params.featured_image }}" />
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         {{/*  // Assets information  */}}
-        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.3/css/boxicons.min.css' rel='stylesheet'>
         {{ block "extra_css" . }}{{ end }}
-        {{- $cssOpts := (dict "targetPath" "css/main.css" "enableSourceMap" true ) -}}
+        {{- $cssOpts := (dict "targetPath" "styles/main.css" "enableSourceMap" true ) -}}
         {{- $postcssOpts := (dict "config" "assets/config/postcss.config.js" ) -}}
-        {{- if .Site.IsServer -}}
-        {{- $styles := resources.Get "scss/main.scss" | toCSS $cssOpts | postCSS $postcssOpts }}
-        <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
-        {{- else -}}
-        {{- $styles := resources.Get "scss/main.scss" | toCSS $cssOpts | postCSS $postcssOpts | minify | fingerprint }}
-        <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" media="screen">
-        {{- end }}
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        {{ $glide := resources.Get "styles/glide.css" }}
+        {{ $glideTheme := resources.Get "styles/glide-theme.css" }}
+        {{- $styles := resources.Get "styles/main.scss" | toCSS $cssOpts | postCSS $postcssOpts }}
+        {{ $stylesAll := slice $glide $glideTheme $styles | resources.Concat "styles/main.css" | minify }}
+        <link rel="stylesheet" href="{{ $stylesAll.Permalink }}" media="screen" crossorigin="anonymous">
     </head>
     <body>
         <div id="main">
@@ -47,10 +44,21 @@
             {{ end -}}
         </div>
 
-        {{ block "extra_js" .}}
+        {{ block "extra_js" . }}
         {{ end }}
 
+        {{/*  Js information */}}
+        {{- $vueDev := resources.Get "js/vue-dev.js" }}
+        {{- $vueProd := resources.Get "js/vue.js" }}
+        {{ $icons := resources.Get "js/boxicons.js" }}
+        {{- $glide := resources.Get "js/glide.js" }}
         {{- $js := resources.Get "js/main.js" }}
-        <script src="{{ $js.Permalink }}"></script>
+        {{ $jsDevAll := slice $icons $glide $vueDev $js | resources.Concat "js/main.js" | minify }}
+        {{ $jsProdAll := slice $icons $glide $vueProd $js | resources.Concat "js/main.js" | minify }}
+        {{ if .Site.IsServer }}
+        <script src="{{ $jsProdAll.Permalink }}"></script>
+        {{ else }}
+        <script src="{{ $jsDevAll.Permalink }}"></script>
+        {{ end }}
     </body>
 </html>
