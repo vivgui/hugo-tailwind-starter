@@ -56,9 +56,9 @@
         {{ $jsDevAll := slice $icons $glide $vueDev $js | resources.Concat "js/main.js" | minify }}
         {{ $jsProdAll := slice $icons $glide $vueProd $js | resources.Concat "js/main.js" | minify }}
         {{ if .Site.IsServer }}
-        <script src="{{ $jsProdAll.Permalink }}"></script>
-        {{ else }}
         <script src="{{ $jsDevAll.Permalink }}"></script>
+        {{ else }}
+        <script src="{{ $jsProdAll.Permalink }}"></script>
         {{ end }}
     </body>
 </html>
