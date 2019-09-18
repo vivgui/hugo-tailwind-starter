@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "develop": "hugo server --disableFastRender --gc --navigateToChanged",
-    "build": "cross-env HUGO_ENV='production' NODE_ENV='production' hugo"
+    "build": "cross-env HUGO_ENV='production' hugo"
   },
   "author": "Vivian Guillen",
   "license": "MIT",
