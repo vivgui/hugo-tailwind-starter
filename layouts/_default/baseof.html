@@ -53,7 +53,7 @@
         {{ $icons := resources.Get "js/boxicons.js" }}
         {{- $glide := resources.Get "js/glide.js" }}
         {{- $js := resources.Get "js/main.js" }}
-        {{ $jsDevAll := slice $icons $glide $vueDev $js | resources.Concat "js/main.js" | minify }}
+        {{ $jsDevAll := slice $icons $glide $vueDev $js | resources.Concat "js/main-dev.js" | minify }}
         {{ $jsProdAll := slice $icons $glide $vueProd $js | resources.Concat "js/main.js" | minify }}
         {{ if .Site.IsServer }}
         <script src="{{ $jsDevAll.Permalink }}"></script>
