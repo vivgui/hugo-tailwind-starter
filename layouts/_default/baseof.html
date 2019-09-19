@@ -27,8 +27,9 @@
         {{- $postcssOpts := (dict "config" "assets/config/postcss.config.js" ) -}}
         {{ $glide := resources.Get "styles/glide.css" }}
         {{ $glideTheme := resources.Get "styles/glide-theme.css" }}
+        {{ $icons := resources.Get "styles/boxicons.css" | postCSS $postcssOpts }}
         {{- $styles := resources.Get "styles/main.scss" | toCSS $cssOpts | postCSS $postcssOpts }}
-        {{ $stylesAll := slice $glide $glideTheme $styles | resources.Concat "styles/main.css" | minify }}
+        {{ $stylesAll := slice $icons $glide $glideTheme $styles | resources.Concat "styles/main.css" | minify }}
         <link rel="stylesheet" href="{{ $stylesAll.Permalink }}" media="screen" crossorigin="anonymous">
     </head>
     <body>
@@ -51,11 +52,10 @@
         {{/*  Js information */}}
         {{- $vueDev := resources.Get "js/vue-dev.js" }}
         {{- $vueProd := resources.Get "js/vue.js" }}
-        {{ $icons := resources.Get "js/boxicons.js" }}
         {{- $glide := resources.Get "js/glide.js" }}
         {{- $js := resources.Get "js/main.js" }}
-        {{ $jsDevAll := slice $icons $glide $vueDev $js | resources.Concat "js/main-dev.js" | minify }}
-        {{ $jsProdAll := slice $icons $glide $vueProd $js | resources.Concat "js/main.js" | minify }}
+        {{ $jsDevAll := slice $glide $vueDev $js | resources.Concat "js/main-dev.js" | minify }}
+        {{ $jsProdAll := slice $glide $vueProd $js | resources.Concat "js/main.js" | minify }}
         {{ if .Site.IsServer }}
         <script src="{{ $jsDevAll.Permalink }}"></script>
         {{ else }}
