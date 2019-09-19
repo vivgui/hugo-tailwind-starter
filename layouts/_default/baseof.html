@@ -6,19 +6,20 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         {{/*  // Meta information  */}}
-        <title>{{ .Title }}{{ if not .IsHome}} | {{ .Site.Title }}{{end}}</title>
-        <meta name="description" content="{{ .Params.meta_description }}">
+        <title>{{ .Title }}{{ if not .IsHome }} | {{ .Site.Title }}{{ end }}</title>
+        <meta name="description" content="{{ if .Params.meta_description }}{{ .Params.meta_description }}{{ else }} {{ $data.meta.description }} {{ end }}">
         <link rel="canonical" href="{{ .Permalink }}" />
         <meta property="og:site_name" content="{{ .Site.Title }}">
-        <meta property="og:title" content="{{ .Title }}">
         <meta property="og:url" content="{{ .Permalink }}">
-        <meta property="og:description" content="{{ .Params.meta_description }}">
-        <meta property="og:image" content="{{ .Params.featured_image }}">
+        <meta property="og:title" content="{{ .Title }}">
+        <meta property="og:description" content="{{ if .Params.meta_description }}{{ .Params.meta_description }}{{ else }} {{ $data.meta.description }} {{ end  }}">
+        <meta property="og:image" content="{{ if .Params.featured_image }}{{ .Params.featured_image }}{{ else }} {{ $data.meta.img }} {{ end  }}">
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:description" content="{{ .Params.meta_description }}" />
+        <meta property="twitter:url" content="{{ .Permalink }}">
         <meta name="twitter:title" content="{{ .Title }}" />
+        <meta name="twitter:description" content="{{ if .Params.meta_description }}{{ .Params.meta_description }}{{ else }} {{ $data.meta.description }} {{ end  }}" />
         <meta name="twitter:site" content="@{{ $data.social.twitter }}" />
-        <meta name="twitter:image" content="{{ .Params.featured_image }}" />
+        <meta name="twitter:image" content="{{ if .Params.featured_image }}{{ .Params.featured_image }}{{ else }} {{ $data.meta.img }} {{ end  }}" />
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         {{/*  // Assets information  */}}
         {{ block "extra_css" . }}{{ end }}

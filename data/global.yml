@@ -1,3 +1,9 @@
 # Social media
+
+meta:
+  title: this is a title
+  description: this is a description
+  img: /img/
+
 social:
   twitter: vivgui
