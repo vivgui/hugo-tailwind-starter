@@ -7,28 +7,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         {{/*  // Meta information  */}}
         <title>{{ .Title }}{{ if not .IsHome }} | {{ .Site.Title }}{{ end }}</title>
-        <meta name="description" content="{{ if .Params.meta_description }}{{ .Params.meta_description }}{{ else }} {{ $data.meta.description }} {{ end }}">
+        <meta name="description" content="{{ if .Params.meta_description }}{{ .Params.meta_description }}{{ else }}{{ $data.meta.description }}{{ end }}">
         <link rel="canonical" href="{{ .Permalink }}" />
         <meta property="og:site_name" content="{{ .Site.Title }}">
         <meta property="og:url" content="{{ .Permalink }}">
         <meta property="og:title" content="{{ .Title }}">
-        <meta property="og:description" content="{{ if .Params.meta_description }}{{ .Params.meta_description }}{{ else }} {{ $data.meta.description }} {{ end  }}">
-        <meta property="og:image" content="{{ if .Params.featured_image }}{{ .Params.featured_image }}{{ else }} {{ $data.meta.img }} {{ end  }}">
+        <meta property="og:description" content="{{ if .Params.meta_description }}{{ .Params.meta_description }}{{ else }}{{ $data.meta.description }}{{ end  }}">
+        <meta property="og:image" content="{{ if .Params.featured_image }}{{ .Params.featured_image }}{{ else }}{{ $data.meta.img }}{{ end  }}">
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="{{ .Permalink }}">
         <meta name="twitter:title" content="{{ .Title }}" />
-        <meta name="twitter:description" content="{{ if .Params.meta_description }}{{ .Params.meta_description }}{{ else }} {{ $data.meta.description }} {{ end  }}" />
+        <meta name="twitter:description" content="{{ if .Params.meta_description }}{{ .Params.meta_description }}{{ else }}{{ $data.meta.description }}{{ end  }}" />
         <meta name="twitter:site" content="@{{ $data.social.twitter }}" />
-        <meta name="twitter:image" content="{{ if .Params.featured_image }}{{ .Params.featured_image }}{{ else }} {{ $data.meta.img }} {{ end  }}" />
+        <meta name="twitter:image" content="{{ if .Params.featured_image }}{{ .Params.featured_image }}{{ else }}{{ $data.meta.img }}{{ end  }}" />
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         {{/*  // Assets information  */}}
         {{ block "extra_css" . }}{{ end }}
-        {{- $cssOpts := (dict "targetPath" "styles/main.css" "enableSourceMap" true ) -}}
-        {{- $postcssOpts := (dict "config" "assets/config/postcss.config.js" ) -}}
+        {{ $cssOpts := (dict "targetPath" "styles/main.css" "enableSourceMap" true ) }}
+        {{ $postcssOpts := (dict "config" "assets/config/postcss.config.js" ) }}
         {{ $glide := resources.Get "styles/glide.css" }}
         {{ $glideTheme := resources.Get "styles/glide-theme.css" }}
         {{ $icons := resources.Get "styles/boxicons.css" | postCSS $postcssOpts }}
-        {{- $styles := resources.Get "styles/main.scss" | toCSS $cssOpts | postCSS $postcssOpts }}
+        {{ $styles := resources.Get "styles/main.scss" | toCSS $cssOpts | postCSS $postcssOpts }}
         {{ $stylesAll := slice $icons $glide $glideTheme $styles | resources.Concat "styles/main.css" | minify }}
         <link rel="stylesheet" href="{{ $stylesAll.Permalink }}" media="screen" crossorigin="anonymous">
     </head>
@@ -38,8 +38,7 @@
             {{ partial "header" . }}
             {{ end -}}
 
-            {{ block "main" . }}
-            {{ end -}}
+            {{ block "main" . }}{{ end -}}
 
             {{ block "footer" . }}
             {{ partial "footer" . }}
@@ -50,10 +49,10 @@
         {{ end }}
 
         {{/*  Js information */}}
-        {{- $vueDev := resources.Get "js/vue-dev.js" }}
-        {{- $vueProd := resources.Get "js/vue.js" }}
-        {{- $glide := resources.Get "js/glide.js" }}
-        {{- $js := resources.Get "js/main.js" }}
+        {{ $vueDev := resources.Get "js/vue-dev.js" }}
+        {{ $vueProd := resources.Get "js/vue.js" }}
+        {{ $glide := resources.Get "js/glide.js" }}
+        {{ $js := resources.Get "js/main.js" }}
         {{ $jsDevAll := slice $glide $vueDev $js | resources.Concat "js/main-dev.js" | minify }}
         {{ $jsProdAll := slice $glide $vueProd $js | resources.Concat "js/main.js" | minify }}
         {{ if .Site.IsServer }}

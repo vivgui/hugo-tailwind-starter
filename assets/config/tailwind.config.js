@@ -3,7 +3,8 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
   theme: {
     fontFamily: {
-      body: ["Open Sans", "sans-serif"]
+      header: ['sans-serif']
+      body: ['sans-serif']
     },
 
     screens: {
