@@ -7,7 +7,7 @@ html {
 }
 
 .btn {
-    @apply transition-all inline-block text-center;
+    @apply transition-colors inline-block text-center;
 
     &:focus {
         @apply outline-none shadow-outline;
