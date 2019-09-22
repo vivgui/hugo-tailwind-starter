@@ -6,4 +6,7 @@ meta:
   img: /img/
 
 social:
-  twitter: vivgui
+  twitter:
+    username: vivgui
+    icon: bxl-twitter
+    link:

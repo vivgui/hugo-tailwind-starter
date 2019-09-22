@@ -18,7 +18,7 @@
         <meta property="twitter:url" content="{{ .Permalink }}">
         <meta name="twitter:title" content="{{ .Title }}" />
         <meta name="twitter:description" content="{{ if .Params.meta_description }}{{ .Params.meta_description }}{{ else }}{{ $data.meta.description }}{{ end  }}" />
-        <meta name="twitter:site" content="@{{ $data.social.twitter }}" />
+        <meta name="twitter:site" content="@{{ $data.social.twitter.username }}" />
         <meta name="twitter:image" content="{{ if .Params.featured_image }}{{ .Params.featured_image }}{{ else }}{{ $data.meta.img }}{{ end  }}" />
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         {{/*  // Assets information  */}}
@@ -34,15 +34,9 @@
     </head>
     <body>
         <div id="main">
-            {{ block "header" . }}
-            {{ partial "header" . }}
-            {{ end -}}
-
-            {{ block "main" . }}{{ end -}}
-
-            {{ block "footer" . }}
-            {{ partial "footer" . }}
-            {{ end -}}
+            {{ block "header" . }}{{ partial "header" . }}{{ end }}
+            {{ block "main" . }}{{ end }}
+            {{ block "footer" . }}{{ partial "footer" . }}{{ end }}
         </div>
 
         {{ block "extra_js" . }}
