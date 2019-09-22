@@ -7,7 +7,8 @@ module.exports = {
       ? require("@fullhuman/postcss-purgecss")({
           content: ["layouts/**/*.html"],
           css: ["public/css/*.css"],
-          extractors: [{ extractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || [], extensions: ["html"] }]
+          extractors: [{ extractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || [], extensions: ["html"] }],
+          whitelistPatternsChildren: [/glide/]
         })
       : null,
 
