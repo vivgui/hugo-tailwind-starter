@@ -103,6 +103,12 @@ module.exports = {
       },
       zIndex: {
         '-1': '-1'
+      },
+      listStyleType: {
+        latin: 'lower-latin',
+        circle: 'circle',
+        square: 'square',
+        roman: 'upper-roman',
       }
     }
   },
