@@ -2,6 +2,13 @@
 @tailwind base;
 @tailwind components;
 
+// removes arrows in type="number" inputs
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 html {
     @apply font-body antialiased;
 }

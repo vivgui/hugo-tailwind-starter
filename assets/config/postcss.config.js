@@ -5,7 +5,7 @@ module.exports = {
 
     process.env.HUGO_ENV === "production"
       ? require("@fullhuman/postcss-purgecss")({
-          content: ["layouts/**/*.html"],
+          content: ["layouts/**/*.html", "content/**/*.md"],
           css: ["public/css/*.css"],
           extractors: [{ extractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || [], extensions: ["html"] }],
           whitelistPatternsChildren: [/glide/]
